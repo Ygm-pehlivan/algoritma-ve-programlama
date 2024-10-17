@@ -1,5 +1,5 @@
 # algoritma-ve-programlama
-işlem süreleri
+Kod işlem süreleri
 
 #include <stdio.h>
 #include <time.h>
