@@ -1,133 +1,102 @@
-# algoritma-ve-programlama
-Kod işlem süreleri
+import matplotlib.pyplot as plt
 
-#include <stdio.h>
-#include <time.h>
-int main() {
-clock_t start = clock();
-printf("Merhaba MIS, algoritma ve programlama\n");
-clock_t end = clock();
-double time_spent = (double)(end - start) /
-CLOCKS_PER_SEC;
-printf("C işlem süresi: %f saniye\n", time_spent);
-return 0;
-} 
+# Kadın ve erkeklerin ortalama günlük kalori ihtiyaçları (kalori cinsinden)
+kadın_günlük_kalori_ihtiyacı = 2000
+erkek_günlük_kalori_ihtiyacı = 2500
 
-Merhaba MIS, algoritma ve programlama
-C işlem süresi: 0.000085 saniye
-
-public class Main {
-public static void main(String[] args) {
-long startTime = System.nanoTime();
-System.out.println("Merhaba MIS, algoritma ve programlama dersi başladı");
-long endTime = System.nanoTime();
-double duration = (endTime - startTime) /
-1_000_000.0; // milisaniye cinsine çevir
-System.out.println("Java işlem süresi: " + duration + "milisaniye");
- }
+# Besin türlerinin gram başına kalori miktarları
+besinler = {
+    "karbonhidrat": 4, # 1 gram karbonhidrat = 4 kalori
+    "protein": 4,      # 1 gram protein = 4 kalori
+    "yağ": 9,          # 1 gram yağ = 9 kalori
+    "elma": 0.52,      # 1 gram elma = 0.52 kalori
+    "muz": 0.89,       # 1 gram muz = 0.89 kalori
+    "pirinç": 1.3,     # 1 gram pişmiş pirinç = 1.3 kalori
+    "ekmek": 2.64,     # 1 gram beyaz ekmek = 2.64 kalori
+    "tavuk": 2.39,     # 1 gram pişmiş tavuk = 2.39 kalori
+    "peynir": 4.02,    # 1 gram peynir = 4.02 kalori
+    "yumurta": 1.55    # 1 gram pişmiş yumurta = 1.55 kalori
 }
 
-Merhaba MIS, algoritma veprogramlama dersi başladı
-Java işlem süresi: 0.57671milisaniye
-
-
-using System;
-using System.Diagnostics;
-class Program
-{
-static void Main()
-{
-Stopwatch stopwatch = new Stopwatch();
-stopwatch.Start();
-Console.WriteLine("Merhaba MIS, algoritma ve programlama dersi başladı");
-stopwatch.Stop();
-Console.WriteLine($"C# işlem süresi: {stopwatch.Elapsed.TotalSeconds} saniye");
+# Ortalama ağırlıklar
+agirliklar = {
+    "elma": 182,       # 1 adet elmanın gramı
+    "muz": 118,        # 1 adet muzun gramı
+    "pirinç": 158,     # gram (1 fincan pişmiş pirinç)
+    "ekmek": 28,       # gram (1 dilim beyaz ekmek)
+    "tavuk": 140,      # gram (1 porsiyon pişmiş tavuk)
+    "peynir": 28,      # gram (1 dilim peynir)
+    "yumurta": 50      # 1 adet yumurtanın gramı
 }
-}
+ #besinler ve ağırlıklar dictionery kullanılarak yazılmıştır.
+ # Kullanıcıdan alınan gram miktarları
+cinsiyet = str(input("Cinsiyetiniz nedir? ").lower())
 
-Merhaba MIS, algoritma ve programlama dersi başladı
-C# işlem süresi: 0.0173406 saniye
+# Haftalık kalori alımı için veri girişi
+haftalik_kalori_alimi = []
+for gun in range(7):
+    print(f"\n{gun + 1}. Gün:")
 
+  # Günlük karbonhidrat, protein ve yağ alımı
+    karbonhidrat_g = float(input("Günlük kaç gram karbonhidrat almak istiyorsunuz? "))
+    protein_g = float(input("Günlük kaç gram protein almak istiyorsunuz? "))
+    yağ_g = float(input("Günlük kaç gram yağ almak istiyorsunuz? "))
 
-package main
-import (
-"fmt"
-"time"
-)
+    # Sabah öğünü besinleri
+    elma_adet_sabah = int(input("Sabah kaç adet elma yemek istiyorsunuz? "))
+    yumurta_adet_sabah = int(input("Sabah kaç adet yumurta yemek istiyorsunuz? "))
+    peynir_adet_sabah = int(input("Sabah kaç dilim peynir yemek istiyorsunuz? "))
+    ekmek_adet_sabah = int(input("Sabah kaç adet ekmek yemek istiyorsunuz? "))
 
-func main() {
-start := time.Now()
-fmt.Println("Merhaba MIS, algoritma ve programlama")
-elapsed := time.Since(start)
-fmt.Printf("Go işlem süresi: %s saniye\n", elapsed)
-}
+    # Öğlen öğünü besinleri
+    muz_adet_oglen = int(input("Öğlen kaç adet muz yemek istiyorsunuz? "))
+    elma_adet_oglen = int(input("Öğlen kaç adet elma yemek istiyorsunuz? "))
 
-Merhaba MIS, algoritma ve programlama
-Go işlem süresi: 47.911µs saniye
+    # Akşam öğünü besinleri
+    pirinç_adet_aksam = int(input("Akşam kaç fincan pişmiş pirinç yemek istiyorsunuz? "))
+    ekmek_adet_aksam = int(input("Akşam kaç dilim ekmek yemek istiyorsunuz? "))
+    tavuk_adet_aksam = int(input("Akşam kaç porsiyon pişmiş tavuk yemek istiyorsunuz? "))
+    #Gram cinsindekiler ondalıklı sayıyla yazılabileceğinden float veri tipini kullandım,adetler ise doğal sayı olduğundan integer veri tipini kullandım.
 
+    # Günlük toplam kalori hesaplama
+    toplam_kalori_gunluk = (
+        (karbonhidrat_g * besinler["karbonhidrat"]) +
+        (protein_g * besinler["protein"]) +
+        (yağ_g * besinler["yağ"]) +
+        (elma_adet_sabah * agirliklar["elma"] * besinler["elma"]) +
+        (yumurta_adet_sabah * agirliklar["yumurta"] * besinler["yumurta"]) +
+        (peynir_adet_sabah * agirliklar["peynir"] * besinler["peynir"]) +
+        (ekmek_adet_sabah * agirliklar["ekmek"] * besinler["ekmek"]) +
 
-use std::time::Instant;
-fn main() {
-let start = Instant::now();
-println!("Merhaba MIS, algoritma ve programlama");
-let duration = start.elapsed();
-println!("Rust işlem süresi: {:?}", duration);
-}
+        (muz_adet_oglen * agirliklar["muz"] * besinler["muz"]) +
+        (elma_adet_oglen * agirliklar["elma"] * besinler["elma"]) +
 
-Merhaba MIS, algoritma ve programlama
-Rust işlem süresi: 13.312µs
+        (pirinç_adet_aksam * agirliklar["pirinç"] * besinler["pirinç"]) +
+        (ekmek_adet_aksam * agirliklar["ekmek"] * besinler["ekmek"]) +
+        (tavuk_adet_aksam * agirliklar["tavuk"] * besinler["tavuk"])
+    )
+    haftalik_kalori_alimi.append(toplam_kalori_gunluk)
+"""
+Yukarıdaki kalori hesaplaması; alınan karbonhidrat, protein ve yağ oranlarının 1 gramındaki kalori değerleri ile
+çarpılıp toplanmasıyla hesaplanmıştır. Besinlerin kalori hesaplaması da ağırlıkları ve kalori değerlerinin
+çarpılıp toplanmasıyla toplam kalori hesaplanmıştır.
+"""
+#besinleri ve ağırlıkları yazarken dictionery kullandığım için değerleri köşeli parantezle yazdım.
 
+# Haftalık kalori alımını sütun grafiği şeklinde gösterme
+gunler = ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"]
+plt.bar(gunler, haftalik_kalori_alimi, color='skyblue')
+plt.xlabel('Günler')
+plt.ylabel('Kalori Alımı')
+plt.title('Haftalık Günlük Kalori Alımı')
+plt.axhline(y=(kadın_günlük_kalori_ihtiyacı if cinsiyet == "kadın" else erkek_günlük_kalori_ihtiyacı), color='r', linestyle='--', label='Günlük Kalori İhtiyacı')
+plt.legend()
+plt.show()
 
-start = Time.now
-puts "Merhaba MIS, algoritma ve programlama"
-finish = Time.now
-puts "Ruby işlem süresi: #{finish - start} saniye"
+# Kalori miktarını aşma durumunda diyet önerme
+for gun, kalori in zip(gunler, haftalik_kalori_alimi):
+    if cinsiyet == "kadın" and kalori > kadın_günlük_kalori_ihtiyacı:
+        print(f"\nUyarı: {gun} günü günlük kalori ihtiyacınızı aştınız. Daha dengeli bir diyet için daha az kalorili besinler tercih edin.")
+    elif cinsiyet == "erkek" and kalori > erkek_günlük_kalori_ihtiyacı:
+        print(f"\nUyarı: {gun} günü günlük kalori ihtiyacınızı aştınız. Daha dengeli bir diyet için daha az kalorili besinler tercih edin.")
 
-Merhaba MIS, algoritma ve programlama
-Ruby işlem süresi: 2.8888e-05 saniye
-
-
-const startTime = process.hrtime();
-console.log("Merhaba MIS, algoritma ve programlama dersi başladı");
-const endTime = process.hrtime(startTime);
-const duration = endTime[0] * 1e3 + endTime[1] / 1e6; //milisaniye cinsine çevir
-console.log(`JavaScript işlem süresi: ${duration.toFixed(3)}milisaniye`);
-
-Merhaba MIS, algoritma ve programlama dersi başladı
-JavaScript işlem süresi: 4.768 milisaniye
-
-
-import time
-start = time.time()
-print("Merhaba MIS, algoritma ve programlama dersi başladı")
-end = time.time()
-print(f"Python işlem süresi: {end - start} saniye")
-
-Merhaba MIS, algoritma ve programlama dersi başladı
-Python işlem süresi: 2.3365020751953125e-05 saniye
-
-
-use Time::HiRes qw(time);
-my $start = time();
-print "Merhaba MIS, algoritma ve programlama\n";
-my $end = time();
-printf "Perl işlem süresi: %f saniye\n", $end - $start;
-
-Merhaba MIS, algoritma ve programlama
-Perl işlem süresi: 0.000014 saniye
-
-
-#include <iostream>
-#include <ctime>
-int main() {
-clock_t start = clock();
-std::cout << "Merhaba MIS, algoritma ve programlama \n";
-clock_t end = clock();
-double time_spent = (double)(end - start) /
-CLOCKS_PER_SEC;
-std::cout << "C++ işlem süresi: " << time_spent << "saniye\n";
-return 0;
-}
-
-Merhaba MIS, algoritma ve programlama 
-C++ işlem süresi: 2.6e-05saniye
